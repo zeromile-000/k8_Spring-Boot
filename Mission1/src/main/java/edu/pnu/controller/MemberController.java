@@ -15,24 +15,24 @@ import edu.pnu.domain.MemberVO;
 @RestController
 public class MemberController {
 
-    private List<MemberVO> list = new ArrayList<>();
+    private List<MemberVO> list = new ArrayList<>(); // MemberVO의 정보를 담을 list라는 이름의 ArrayList를 생성
 
-    public MemberController() {
-        for (int i = 1; i <= 10; i++) {
-            list.add(MemberVO.builder()
+    public MemberController() { // MemberController의 기본 생성자 정의
+        for (int i = 1; i <= 10; i++) { // 1 ~ 10까지 10번 반복
+            list.add(MemberVO.builder() // list 객체에 MemberVO 빌더 패턴을 추가
                 .id(i)
                 .name("name" + i)
                 .pass("pass" + i)
                 .regidate(new Date())
-                .build());
+                .build()); 
         }
-        for(MemberVO m : list) {
-        	System.out.println(m.toString());
+        for(MemberVO m : list) { // list 객체의 정보를 m에 반복해서 대입
+        	System.out.println(m.toString()); // m의 toString 메서드를 호출
         }
     }
 
     // 검색 (Read - select)
-    @GetMapping("/members")
+    @GetMapping("/members") //  url에 "/members"라는 단어가 들어가면 get 방식으로 매핑 후 아래 메서드 실행  
     public List<MemberVO> getAllMember() {
         return list;
     }

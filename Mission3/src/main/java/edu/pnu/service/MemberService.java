@@ -24,6 +24,10 @@ public class MemberService {
     // 입력 (Create - insert)
     
     public MemberDTO addMember(MemberDTO MemberDto) {
+    	if (getMemberById(MemberDto.getId()) != null) {
+            System.out.println(MemberDto.getId() + "이 이미 존재합니다.");
+            return null;
+        }
         return memberDao.addMember(MemberDto);
     }
 
