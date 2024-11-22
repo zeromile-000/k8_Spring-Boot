@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,6 +15,7 @@ import com.rubypaper.domain.Board;
 import com.rubypaper.persistence.BoardRepository;
 
 @SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
 public class QueryMethodTest2 {
 	
 	@Autowired
@@ -32,36 +36,44 @@ public class QueryMethodTest2 {
 		}
 	}
 	
-//	@Test // title에 “1” 이 포함되는 데이터 출력
+	@Test // title에 “1” 이 포함되는 데이터 출력
+	@Order(1)
 	public void testFindByTitle2() {
 		List<Board> boardList = boardRepo.findByTitleLike("%1%");
 		System.out.println("검색 결과");
 		for(Board board : boardList) {
 			System.out.println("--->" + board.toString());
+			System.out.println("title에 “1” 이 포함되는 데이터 출력");
 		}
 	}
 		
-//	@Test  // title에 “1” 이 포함되면서 cnt가 50보다 큰 데이터 출력
+	@Test  // title에 “1” 이 포함되면서 cnt가 50보다 큰 데이터 출력
+	@Order(2)
 	public void testfindByTitleLikeAndCntAfter() {
 		List<Board> boardList = boardRepo.findByTitleLikeAndCntAfter("%1%",50L);
 		for(Board board : boardList) {
 			System.out.println("--->" + board.toString());
+			System.out.println("title에 “1” 이 포함되면서 cnt가 50보다 큰 데이터 출력");
 		}
 	}
 	
-//	@Test // Cnt가 10~50 사이인 데이터를 seq 오름차순으로 출력
+	@Test // Cnt가 10~50 사이인 데이터를 seq 오름차순으로 출력
+	@Order(3)
 	public void testfindByCntBetweenOrderBySeq() {
 		List<Board> boardList = boardRepo.findByCntBetweenOrderBySeq(10L,50L);
 		for(Board board : boardList) {
 			System.out.println("--->" + board.toString());
+			System.out.println("Cnt가 10~50 사이인 데이터를 seq 오름차순으로 출력");
 		}
 	}
 	
-	// @Test // title에 “10”이 포함되거나 content에 “2”가 포함되는 데이터를 seq 내림차순으로 출력
+	 @Test // title에 “10”이 포함되거나 content에 “2”가 포함되는 데이터를 seq 내림차순으로 출력
+	 @Order(4)
 	public void testfindByTitleLikeOrContentLikeOrderBySeqDesc() {
 		List<Board> boardList = boardRepo.findByTitleLikeOrContentLikeOrderBySeqDesc("%10%", "%2%");
 		for(Board board : boardList) {
 			System.out.println("--->" + board.toString());
+			System.out.println("title에 “10”이 포함되거나 content에 “2”가 포함되는 데이터를 seq 내림차순으로 출력");
 		}
 	}
 	

@@ -56,6 +56,7 @@ public class TestController {
 		boardRepo.deleteById(seq);
 		return b;
 	}
+	
 
 }
 
