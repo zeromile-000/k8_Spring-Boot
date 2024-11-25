@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import edu.pnu.domaim.Member;
+import edu.pnu.persistence.LogRepository;
 import edu.pnu.persistence.MemberRepository;
 
 @Component
@@ -15,6 +16,9 @@ public class DataInit implements ApplicationRunner {
 
 	@Autowired
 	private MemberRepository memberRepo;
+	
+	@Autowired
+	private LogRepository LogRepo;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -27,5 +31,7 @@ public class DataInit implements ApplicationRunner {
 
 			   );
 		}
+		
+		
 	}
 }

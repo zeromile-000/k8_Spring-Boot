@@ -1,14 +1,10 @@
 package com.rubypaper.persistence;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.rubypaper.domain.Board;
 
-public interface BoardRepository extends JpaRepository<Board,Long>{
+public interface BoardRepository extends JpaRepository<Board,Long> {
 //	List<Board> findByTitle(String searchKeyword);
 //	List<Board> findByContentContaining(String searchKeyword);
 //	List<Board> findByTitleLikeOrContentLike(String title, String content);
@@ -31,7 +27,7 @@ public interface BoardRepository extends JpaRepository<Board,Long>{
 //	@Query("SELECT b.seq, b.title, b.writer, b.createDate FROM Board b "
 //			+ "WHERE b.title like %?1% ORDER BY b.seq DESC")
 //	List<Object[]> queryAnnotationTest2(String searchKeyword);
-	@Query(v)
+//	@Query(v)
 	
 	
 	

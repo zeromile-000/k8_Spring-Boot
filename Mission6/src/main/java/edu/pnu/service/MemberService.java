@@ -2,11 +2,13 @@ package edu.pnu.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.domaim.Member;
+import edu.pnu.persistence.LogRepository;
 import edu.pnu.persistence.MemberRepository;
 
 @Service
@@ -15,12 +17,20 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepo;
 	
+	@Autowired
+	private LogRepository logRepo;
+	
 	public List<Member> getMembers(){
-		return memberRepo.findAll();
+		
+//		logRepo.findAll();
+		
+		
+		return memberRepo.findAll(); 
 	}
 	
 	public Member getMember(Integer id) {
-		return memberRepo.findById(id).orElse(null);
+		memberRepo.findById(id).orElse(null);
+		return null;
 	}
 	
 	public Member postMember(Member member) {
