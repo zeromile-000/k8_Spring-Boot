@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.pnu.domaim.Logdomain;
 import edu.pnu.domaim.Member;
 import edu.pnu.persistence.LogRepository;
 import edu.pnu.persistence.MemberRepository;
@@ -21,19 +22,31 @@ public class MemberService {
 	private LogRepository logRepo;
 	
 	public List<Member> getMembers(){
-		
-//		logRepo.findAll();
-		
-		
-		return memberRepo.findAll(); 
+		List<Member> list = memberRepo.findAll();
+		Logdomain ld = new Logdomain();
+		ld.setMethod("getAll");
+		ld.setSqlstring("");
+		ld.setSuccess(true);
+		logRepo.save(ld);
+		return list;
 	}
 	
 	public Member getMember(Integer id) {
 		memberRepo.findById(id).orElse(null);
+		Logdomain ld = new Logdomain();
+		ld.setMethod("get");
+		ld.setSqlstring("");
+		ld.setSuccess(true);
+		logRepo.save(ld);
 		return null;
 	}
 	
 	public Member postMember(Member member) {
+		Logdomain ld = new Logdomain();
+		ld.setMethod("post");
+		ld.setSqlstring("");
+		ld.setSuccess(true);
+		logRepo.save(ld);
 		member.setPass("pass1");
 		member.setName("김준영");
 		member.setRegiDate(new Date());
@@ -41,11 +54,23 @@ public class MemberService {
 	}
 	
 	public Member putMember(Member member) {
+		Logdomain ld = new Logdomain();
+		ld.setMethod("put");
+		ld.setSqlstring("");
+		ld.setSuccess(true);
+		logRepo.save(ld);
 		Member member2 = memberRepo.findById(member.getId()).get();
 		if(member.getName() != null) member2.setName(member.getName());
+		
 		return memberRepo.save(member2);
 	}
+	
 	public Member deleteMember(Integer id) {
+		Logdomain ld = new Logdomain();
+		ld.setMethod("delete");
+		ld.setSqlstring("");
+		ld.setSuccess(true);
+		logRepo.save(ld);
 		Member member3 = memberRepo.findById(id).get();
 		memberRepo.deleteById(id);
 		return member3;
