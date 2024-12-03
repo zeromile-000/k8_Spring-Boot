@@ -22,7 +22,7 @@ public class BoardRepositoryTest {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-//	@Test
+	@Test
 	public void testInsert() {
 		
 		Member member1 = new Member();

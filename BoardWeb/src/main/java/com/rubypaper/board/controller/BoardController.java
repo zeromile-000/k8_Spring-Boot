@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rubypaper.board.domain.Board;
+import com.rubypaper.board.domain.Search;
 import com.rubypaper.board.security.SecurityUser;
 import com.rubypaper.board.service.BoardService;
+
+
 
 @Controller
 @RequestMapping("/board/")
@@ -19,9 +22,14 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/getBoardList")
-	public String getBoardList(Model model, Board board) {
-		Page<Board> boardList = boardService.getBoardList(board);
+	
+	@RequestMapping("/getBoardList")
+	public String getBoardList(Model model, Search search) {
+		if(search.getSearchCondition() == null)
+			search.setSearchCondition("TITLE");
+		if(search.getSearchKeyword() == null)
+			search.setSearchKeyword("");
+		Page<Board> boardList = boardService.getBoardList(search);
 		model.addAttribute("boardList", boardList);
 		return "board/getBoardList";
 	}
