@@ -14,8 +14,11 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(security -> security.requestMatchers("/board/**").authenticated()
-				.requestMatchers("/admin/**").hasRole("ADMIN").anyRequest().permitAll());
+		http.authorizeHttpRequests(security -> 
+		security.requestMatchers("/board/**").authenticated()
+				.requestMatchers("/admin/**").hasRole("ADMIN")
+				.anyRequest().permitAll());
+		
 		http.csrf(cf -> cf.disable());
 
 		http.formLogin(form -> form.loginPage("/system/login").defaultSuccessUrl("/board/getBoardList", true));
